@@ -56,5 +56,4 @@ secrets.yml
 .sts4-cache
 .history
 .vscode
-*.mv.db
-^.trace.db
+**/db/
