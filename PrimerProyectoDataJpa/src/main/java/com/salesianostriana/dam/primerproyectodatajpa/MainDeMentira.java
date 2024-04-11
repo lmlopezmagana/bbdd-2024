@@ -3,10 +3,12 @@ package com.salesianostriana.dam.primerproyectodatajpa;
 
 import com.salesianostriana.dam.primerproyectodatajpa.modelo.Alumno;
 import com.salesianostriana.dam.primerproyectodatajpa.repositorios.AlumnoRepository;
+
+import jakarta.annotation.PostConstruct;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import javax.annotation.PostConstruct;
 
 @Component
 

@@ -54,3 +54,7 @@ transaction-logs
 secrets.yml
 .gradletasknamecache
 .sts4-cache
+.history
+.vscode
+*.mv.db
+^.trace.db
