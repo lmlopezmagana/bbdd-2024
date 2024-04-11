@@ -1,5 +1,5 @@
-# Bases de datos - 2022/23
-Repositorio del módulo de Bases de Datos para el curso 2022-23 (DAM - Salesianos Triana)
+# Bases de datos - 2023/24
+Repositorio del módulo de Bases de Datos para el curso 2023-24 (DAM - Salesianos Triana)
 
 A continuación, se detallan los proyectos que se incluyen dentro del repositorio.
 
