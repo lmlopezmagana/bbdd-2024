@@ -1,8 +1,6 @@
 
 # Ejemplo 9 - Identificador compuesto
 
-Introducción
-
 ## Algo de teoría
 
 ### Tipos `Embeddable`
