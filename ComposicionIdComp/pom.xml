@@ -9,10 +9,10 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.salesianostriana.dam</groupId>
-	<artifactId>Composicion</artifactId>
+	<artifactId>ComposicionIdComp</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>Composicion</name>
-	<description>Ejemplo de ManyToOne y OneToMany con Composición</description>
+	<name>ComposicionIdComp</name>
+	<description>Ejemplo de ManyToOne y OneToMany con Composición con identificador compuesto</description>
 	<properties>
 		<java.version>17</java.version>
 	</properties>

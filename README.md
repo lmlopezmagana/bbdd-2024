@@ -18,8 +18,13 @@ A continuación, se detallan los proyectos que se incluyen dentro del repositori
   - [Ejemplo 7 - Herencia Single Table ](./HerenciaSingleTable/), cuando las clases hijas no aportan casi ningún atributo y queremos dejar todo reflejado en una única tabla.
   - [Ejemplo 8 - Herencia Joined](./HerenciaJoined/) que es la más habitual, en la que para las entidades hijas se genera una tabla con una clave externa y los atributos específicos.
 
-- Ejemplos 9 y 10 sobre seguridad:
-  - [Ejemplo 9 - Seguridad en Memoria](./SeguridadEnMemoria/): primer acercamiento a Spring Security con la implementación de un mecanismo de autenticación con listado de usuarios en memoria.
-  - [Ejemplo 10 - Seguridad en base de datos](./SeguridadEnUDS/): segundo acercamiento a Spring Security con la implementación de un mecanismo de autenticación con dos roles diferentes, almacenando los usuarios en base de datos a través del uso de entidades y repositorios de Spring Data JPA. 
+- [Ejemplo 9 - Identificadores compuestos](./IdentificadorCompuesto/): ejemplo de creación de un Id compuesto por varios atributos, con diferentes tipos de solución y aplicación.
+
+- [Ejemplo 10 - Composición con identificador compuesto](./ComposicionIdComp/): mejora del [ejemplo 3](./Composicion/) para que una parte del identificador compuesto sea autogenerada. 
 
 - [Ejemplo 11 - ManyToMany Extra](./ManyToManyExtra/): sobre cómo tratar asociaciones de esta multiplicidad que tengan atributos extra.    
+
+- Ejemplos 12 y 13 sobre seguridad:
+  - [Ejemplo 12 - Seguridad en Memoria](./SeguridadEnMemoria/): primer acercamiento a Spring Security con la implementación de un mecanismo de autenticación con listado de usuarios en memoria.
+  - [Ejemplo 13 - Seguridad en base de datos](./SeguridadEnUDS/): segundo acercamiento a Spring Security con la implementación de un mecanismo de autenticación con dos roles diferentes, almacenando los usuarios en base de datos a través del uso de entidades y repositorios de Spring Data JPA. 
+
