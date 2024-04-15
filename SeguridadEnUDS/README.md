@@ -1,5 +1,5 @@
 
-# Ejemplo 10 - Ejemplo de uso de Spring Security con servicio de autenticación  
+# Ejemplo 12 - Ejemplo de uso de Spring Security con servicio de autenticación  
 
 Como hemos visto en el [ejemplo anterior](../SeguridadEnMemoria/), el proceso de autenticación nos permite responder a la pregunta ¿y tú, quién eres?. En dicho ejemplo, hemos hecho la proceso  en memoria. Vamos a proceder ahora a crear un servicio de autenticación, que nos permitirá dar toda la versatilidad a dicho proceso.
 
@@ -14,10 +14,10 @@ Como hemos visto en el [ejemplo anterior](../SeguridadEnMemoria/), el proceso de
 
 Dentro del modelo de clases e interfaces de Spring Security, encontramos algunos de ellos que serán claves en el proceso de autenticación, como son:
 
-- [`org.springframework.security.core.userdetails.UserDetails`](https://docs.spring.io/spring-security/site/docs/5.2.0.BUILD-SNAPSHOT/api/org/springframework/security/core/userdetails/UserDetails.html): **Proporciona información básica de un usuario**.
+- [`org.springframework.security.core.userdetails.UserDetails`](https://docs.spring.io/spring-security/site/docs/current/api/org/springframework/security/core/userdetails/UserDetails.html): **Proporciona información básica de un usuario**.
 Las implementaciones no son utilizadas directamente por Spring Security por motivos de seguridad. Simplemente almacenan información de usuario que luego se encapsula en objectos de tipo `Authentication`. Esto permite separar  la información del usuario no relacionada con la seguridad (como direcciones de correo electrónico, números de teléfono, etc.). **Suele interesar implementar esta interfaz en lugar a usar directamente la clase `org.springframework.security.core.userdetails.User`**. 
-- [`org.springframework.security.core.userdetails.UserDetailsService`](https://docs.spring.io/spring-security/site/docs/5.2.0.BUILD-SNAPSHOT/api/org/springframework/security/core/userdetails/UserDetailsService.html): interfaz principal que carga los datos de un usuario. Se utiliza en todo el framework como un DAO de usuarios. Solo proporciona un método, y este es de solo lectura. 
- - [`org.springframework.security.core.GrantedAuthority`](https://docs.spring.io/spring-security/site/docs/5.2.0.BUILD-SNAPSHOT/api/org/springframework/security/core/GrantedAuthority.html). Representa una autorización (un privilegio concreto) otorgado a un objeto de tipo `Authentication`.Ppodemos considerar a cada `GrantedAuthority` como un privilegio individual:  `READ_AUTHORITY`, `WRITE_PRIVILEGE` o incluso `CAN_EXECUTE_AS_ROOT`. _Lo importante a entender es que el nombre es **arbitrario**_. De manera similar, en Spring Security, podemos pensar en cada rol como una `GrantedAuthority` de _grano grueso_ que se representa como una cadena y tiene el prefijo "ROLE". 
+- [`org.springframework.security.core.userdetails.UserDetailsService`](https://docs.spring.io/spring-security/site/docs/current/api/org/springframework/security/core/userdetails/UserDetailsService.html): interfaz principal que carga los datos de un usuario. Se utiliza en todo el framework como un DAO de usuarios. Solo proporciona un método, y este es de solo lectura. 
+ - [`org.springframework.security.core.GrantedAuthority`](https://docs.spring.io/spring-security/site/docs/current/api/org/springframework/security/core/GrantedAuthority.html). Representa una autorización (un privilegio concreto) otorgado a un objeto de tipo `Authentication`.Podemos considerar a cada `GrantedAuthority` como un privilegio individual:  `READ_AUTHORITY`, `WRITE_PRIVILEGE` o incluso `CAN_EXECUTE_AS_ROOT`. _Lo importante a entender es que el nombre es **arbitrario**_. De manera similar, en Spring Security, podemos pensar en cada rol como una `GrantedAuthority` de _grano grueso_ que se representa como una cadena y tiene el prefijo "ROLE". 
 
 ## Paso 1: Nuestro modelo de usuario
 
@@ -210,21 +210,18 @@ public class SecurityConfig {
 	private final PasswordEncoder passwordEncoder;
 	
 	@Bean
-	public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-		http
-		.authorizeRequests()
-			.antMatchers("/css/**","/js/**","/webjars/**", "/h2-console/**").permitAll()
-			.antMatchers("/admin/**").hasRole("ADMIN")
-			.anyRequest().authenticated()
-			.and()
-		.formLogin()
-			.loginPage("/login")
-			.permitAll();
+    SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+    	http.authorizeHttpRequests(
+				(authz) -> authz.requestMatchers("/css/**", "/js/**", "/h2-console/**")
+				.permitAll().anyRequest().authenticated())
+			.formLogin((loginz) -> loginz
+					.loginPage("/login").permitAll());
 		
 		// Añadimos esto para poder seguir accediendo a la consola de H2
 		// con Spring Security habilitado.
-		http.csrf().disable();
-		http.headers().frameOptions().disable();
+    	http.csrf(csrfz -> csrfz.disable());
+    	http.headers(headersz -> headersz
+    			.frameOptions(frameOptionsz -> frameOptionsz.disable()));
 		
 		return http.build();
 	}

@@ -20,10 +20,9 @@ public class SecurityConfig {
 	
 	private final UserDetailsService userDetailsService;
 	private final PasswordEncoder passwordEncoder;
-	
-	@Bean
-	public AuthenticationManager 
-			authenticationManager(HttpSecurity http) throws Exception {
+
+    @Bean
+    AuthenticationManager authenticationManager(HttpSecurity http) throws Exception {
 		
 		AuthenticationManagerBuilder authBuilder =
 				http.getSharedObject(AuthenticationManagerBuilder.class);
@@ -32,51 +31,30 @@ public class SecurityConfig {
 			.authenticationProvider(daoAuthenticationProvider())
 			.build();
 		
-		
 	}
-	
-	/*@Bean
-    public InMemoryUserDetailsManager userDetailsService() {
-        UserDetails user = User.builder()
-        		.username("admin")
-        		.password("{noop}admin")
-        		.roles("ADMIN")
-            .build();
-        return new InMemoryUserDetailsManager(user);
-    }*/
-	
-	/*
-	@Bean
-	public UserDetailsService userDetailsService() {
-		return new UserDetailsServiceImpl();
-	}*/
-	
-	
-	
-	@Bean 
-	public DaoAuthenticationProvider daoAuthenticationProvider() {
+
+    
+    @Bean
+    DaoAuthenticationProvider daoAuthenticationProvider() {
 		DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
 		provider.setUserDetailsService(userDetailsService);
 		provider.setPasswordEncoder(passwordEncoder);
 		return provider;
 	}
-	
-	@Bean
-	public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-		http
-		.authorizeRequests()
-			.antMatchers("/css/**","/js/**","/webjars/**", "/h2-console/**").permitAll()
-			.antMatchers("/admin/**").hasRole("ADMIN")
-			.anyRequest().authenticated()
-			.and()
-		.formLogin()
-			.loginPage("/login")
-			.permitAll();
+
+    @Bean
+    SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+    	http.authorizeHttpRequests(
+				(authz) -> authz.requestMatchers("/css/**", "/js/**", "/h2-console/**")
+				.permitAll().anyRequest().authenticated())
+			.formLogin((loginz) -> loginz
+					.loginPage("/login").permitAll());
 		
 		// Añadimos esto para poder seguir accediendo a la consola de H2
 		// con Spring Security habilitado.
-		http.csrf().disable();
-		http.headers().frameOptions().disable();
+    	http.csrf(csrfz -> csrfz.disable());
+    	http.headers(headersz -> headersz
+    			.frameOptions(frameOptionsz -> frameOptionsz.disable()));
 		
 		return http.build();
 	}
