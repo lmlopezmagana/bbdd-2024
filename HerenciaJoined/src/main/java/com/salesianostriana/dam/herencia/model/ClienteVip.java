@@ -2,14 +2,16 @@ package com.salesianostriana.dam.herencia.model;
 
 import java.time.LocalDate;
 
-import javax.persistence.Entity;
+import jakarta.persistence.Entity;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 @Entity
 @NoArgsConstructor
 @Data
+@EqualsAndHashCode(callSuper = false)
 public class ClienteVip extends Cliente {
 	
 	private LocalDate fechaVip;
