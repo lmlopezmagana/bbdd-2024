@@ -3,7 +3,7 @@ package com.salesianostriana.dam.manytomany;
 import java.util.Arrays;
 import java.util.List;
 
-import javax.annotation.PostConstruct;
+import jakarta.annotation.PostConstruct;
 
 import org.springframework.stereotype.Component;
 
