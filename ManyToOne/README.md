@@ -3,7 +3,7 @@
 
 ## Antencedentes
 
-- Partimos del proyecto del [Ejemplo 1](https://github.com/lmlopezmagana/bbdd-2023/tree/master/PrimerProyectoDataJpa).
+- Partimos del proyecto del [Ejemplo 1](../PrimerProyectoDataJpa).
 - En él creamos un nuevo proyecto de Spring Boot con las dependencias necesarias (web, data, h2, lombok)
 - Configuramos nuestra conexión a base de datos a través del fichero de _properties_.
 - Estructuramos algunos de los paquetes de nuestra aplicación.

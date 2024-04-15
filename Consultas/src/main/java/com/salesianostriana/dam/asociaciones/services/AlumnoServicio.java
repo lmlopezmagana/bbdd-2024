@@ -18,7 +18,7 @@ public class AlumnoServicio
 	}
 	
 	public List<Alumno> buscarPorCualquierCosa(String cosa) {
-		return this.repository.findByApellidosContainsIgnoreCaseOrNombreContainsIgnoreCaseOrEmailContainsIgnoreCase(cosa, cosa, cosa);
+		return this.repository.findByApellidosContainsIgnoreCaseOrNombreContainsIgnoreCaseOrEmailContainsIgnoreCaseOrderByApellidosDesc(cosa, cosa, cosa);
 	}
 	
 }

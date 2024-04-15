@@ -4,7 +4,7 @@
 
 Una asociación de composición puede venir representada por el siguiente diagrama
 
-![Diagrama](./uml.jpg)
+![Diagrama](./uml.png)
 
 Esta asociación, como en ejemplos anteriores, es una asociación _uno-a-muchos_ que podemos tratar bidireccionalmente, para que su gestión sea más eficiente; sin embargo, el hecho de que sea de **composición le da un tinte algo especial**.
 
@@ -95,6 +95,8 @@ public class Avion {
 }
 
 ```
+
+> En este caso, los métodos _helper_ los escribimos en el lado muchos, porque para la composición es el **lado propietario de la asociación**.
 
 ## Paso 3: Sobre repositorios
 
