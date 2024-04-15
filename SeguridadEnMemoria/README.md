@@ -1,5 +1,5 @@
 
-# Ejemplo 9 - Ejemplo mínimo de uso de Spring Security 
+# Ejemplo 11 - Ejemplo mínimo de uso de Spring Security 
 
 Spring Security es un potente y altamente personalizable framework de autenticación y control de acceso. Es el estándar de facto para asegurar las aplicaciones basadas en Spring.
 
@@ -171,13 +171,11 @@ public class SecurityConfig  {
 	@Bean
 	public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 		
-		http
-		.authorizeRequests()
-			.anyRequest().authenticated()
-			.and()
-		.formLogin()
-			.loginPage("/login")
-			.permitAll();		
+		http.authorizeHttpRequests(
+				(authz) -> authz.anyRequest().authenticated())
+			.formLogin((loginz) -> loginz
+					.loginPage("/login").permitAll());
+
 		return http.build();
 	}
 	
@@ -239,14 +237,13 @@ public class SecurityConfig  {
 	@Bean
 	public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 		
-		http
-		.authorizeRequests()
-			.antMatchers("/css/**","/js/**","/webjars/**").permitAll()
-			.anyRequest().authenticated()
-			.and()
-		.formLogin()
-			.loginPage("/login")
-			.permitAll();		
+		http.authorizeHttpRequests(
+				(authz) -> authz
+				.requestMatchers("/css/**", "/js/**").permitAll()
+				.anyRequest().authenticated())
+			.formLogin((loginz) -> loginz
+					.loginPage("/login").permitAll());
+
 		return http.build();
 	}
 	
@@ -274,7 +271,7 @@ Tenemos varios mecanismos para realizar esto:
 ```xml
 <dependency>
 	<groupId>org.thymeleaf.extras</groupId>
-	<artifactId>thymeleaf-extras-springsecurity5</artifactId>
+	<artifactId>thymeleaf-extras-springsecurity6</artifactId>
 </dependency>
 ```
 

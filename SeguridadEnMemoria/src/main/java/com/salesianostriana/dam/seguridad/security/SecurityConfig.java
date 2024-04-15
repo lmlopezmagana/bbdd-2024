@@ -16,51 +16,51 @@ import org.springframework.security.web.SecurityFilterChain;
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
-	
+
 	@Bean
-	public AuthenticationManager 
-			authenticationManager(HttpSecurity http) throws Exception {
-		
-		AuthenticationManagerBuilder authBuilder =
-				http.getSharedObject(AuthenticationManagerBuilder.class);
-		
-		return authBuilder
-			.authenticationProvider(daoAuthenticationProvider())
-			.build();
-		
-		
+	AuthenticationManager authenticationManager(HttpSecurity http) throws Exception {
+
+		AuthenticationManagerBuilder authBuilder = http.getSharedObject(AuthenticationManagerBuilder.class);
+
+		return authBuilder.authenticationProvider(daoAuthenticationProvider()).build();
+
 	}
-	
+
 	@Bean
-    public InMemoryUserDetailsManager userDetailsService() {
-        UserDetails user = User.builder()
-        		.username("admin")
-        		.password("{noop}admin")
-        		.roles("ADMIN")
-            .build();
-        return new InMemoryUserDetailsManager(user);
-    }
-	
-	@Bean 
-	public DaoAuthenticationProvider daoAuthenticationProvider() {
+	InMemoryUserDetailsManager userDetailsService() {
+		UserDetails user = User.builder()
+				.username("admin").password("{noop}admin")
+				.roles("ADMIN").build();
+		return new InMemoryUserDetailsManager(user);
+	}
+
+	@Bean
+	DaoAuthenticationProvider daoAuthenticationProvider() {
 		DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
 		provider.setUserDetailsService(userDetailsService());
 		provider.setPasswordEncoder(PasswordEncoderFactories.createDelegatingPasswordEncoder());
 		return provider;
 	}
-	
+
 	@Bean
-	public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-		http
-		.authorizeRequests()
-			.antMatchers("/css/**","/js/**","/webjars/**").permitAll()
-			.anyRequest().authenticated()
-			.and()
-		.formLogin()
-			.loginPage("/login")
-			.permitAll();
-		
+	SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+		/*
+		 * http .authorizeRequests()
+		 * .antMatchers("/css/**","/js/**","/webjars/**").permitAll()
+		 * .anyRequest().authenticated() .and() .formLogin() .loginPage("/login")
+		 * .permitAll();
+		 * 
+		 * return http.build();
+		 */
+
+		http.authorizeHttpRequests(
+				(authz) -> authz.requestMatchers("/css/**", "/js/**")
+				.permitAll().anyRequest().authenticated())
+			.formLogin((loginz) -> loginz
+					.loginPage("/login").permitAll());
+
 		return http.build();
+
 	}
 
 }
