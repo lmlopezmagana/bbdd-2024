@@ -2,7 +2,7 @@ package com.salesianostriana.dam.asociaciones.model;
 
 import java.io.Serializable;
 
-import javax.persistence.Embeddable;
+import jakarta.persistence.Embeddable;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;

@@ -21,4 +21,6 @@ insert into asignatura (id, nombre, profesor, curso_id) values (15, 'Formación 
 insert into alumno (id, nombre, apellidos, email, curso_id) values (1, 'Antonio Manuel', 'Fuentes Segura','ertitoantonio@gmail.com', 1);
 insert into alumno (id, nombre, apellidos, email, curso_id) values (2, 'Su Primo', 'Sur Mano','sucolega@gmail.com', 1);
 
-ALTER SEQUENCE hibernate_sequence RESTART WITH 1000;
+alter sequence alumno_seq restart with 1000;
+alter sequence asignatura_seq restart with 1000;
+alter sequence curso_seq restart with 1000;
