@@ -24,7 +24,8 @@ A continuación, se detallan los proyectos que se incluyen dentro del repositori
 
 - [Ejemplo 11 - ManyToMany Extra](./ManyToManyExtra/): sobre cómo tratar asociaciones de esta multiplicidad que tengan atributos extra.    
 
-- Ejemplos 12 y 13 sobre seguridad:
+- Ejemplos 12, 13 y 14 sobre seguridad:
   - [Ejemplo 12 - Seguridad en Memoria](./SeguridadEnMemoria/): primer acercamiento a Spring Security con la implementación de un mecanismo de autenticación con listado de usuarios en memoria.
   - [Ejemplo 13 - Seguridad en base de datos](./SeguridadEnUDS/): segundo acercamiento a Spring Security con la implementación de un mecanismo de autenticación con dos roles diferentes, almacenando los usuarios en base de datos a través del uso de entidades y repositorios de Spring Data JPA. 
+  - [Ejemplo 14 - Login según el rol](./LoginSegunRol/): adaptación del primer ejemplo de seguridad para que al realizar el login de un usuario, se le redirija a una URL específica según su rol.
 

@@ -1,5 +1,5 @@
 
-# Ejemplo 12 - Ejemplo de uso de Spring Security con servicio de autenticación  
+# Ejemplo 13 - Ejemplo de uso de Spring Security con servicio de autenticación  
 
 Como hemos visto en el [ejemplo anterior](../SeguridadEnMemoria/), el proceso de autenticación nos permite responder a la pregunta ¿y tú, quién eres?. En dicho ejemplo, hemos hecho la proceso  en memoria. Vamos a proceder ahora a crear un servicio de autenticación, que nos permitirá dar toda la versatilidad a dicho proceso.
 
