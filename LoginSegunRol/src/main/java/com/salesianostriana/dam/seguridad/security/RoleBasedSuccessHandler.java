@@ -55,7 +55,7 @@ public class RoleBasedSuccessHandler
 		List<GrantedAuthority> authoritiesList =
 				new ArrayList<>(collection);
 		
-		
+		// Usuario autenticado pero sin rol
 		if (authoritiesList.isEmpty())
 			return "ROLE_DEFAULT";
 		

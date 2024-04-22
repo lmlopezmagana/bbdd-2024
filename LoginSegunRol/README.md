@@ -67,7 +67,7 @@ Si el usuario solamente tiene un rol, la colección del paso anterior solamente 
 
 > También podríamos darle a elegir al usuario entre sus diferentes roles, para que fuera él el que escogiera.
 
-En este ejemplo, el peso de los roles se ha establecido estáticamente en un `Map`, aunque se podría buscar una implementación más adecuada.
+**En este ejemplo, el peso de los roles se ha establecido estáticamente en un `Map`, aunque se podría buscar una implementación más adecuada.**
 
 
 ```java
@@ -98,6 +98,7 @@ Para determinar el rol de más peso, podemos implementar un método que ordene l
 @Log
 public class RoleBasedSuccessHandler 
 	implements AuthenticationSuccessHandler {
+
 	@Override
 	public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException {
 
@@ -105,9 +106,7 @@ public class RoleBasedSuccessHandler
 		// Determinar el rol de más privilegios, si el usuario tiene más de uno
 		String role = getMaxRole(authentication.getAuthorities());
 	}
-
-
-	}
+	
 
 	private String getMaxRole(Collection<? extends GrantedAuthority> collection) {
 		List<GrantedAuthority> authoritiesList =
@@ -214,9 +213,9 @@ public class RoleBasedSuccessHandler
 ```
 
 - [`DefaultRedirectStrategy`](https://docs.spring.io/spring-security/site/docs/current/api/org/springframework/security/web/DefaultRedirectStrategy.html) es un objeto de tipo `RedirectStrategy` que nos permite **redirigir** a nuestro usuario a una URL establecida a través de una cadena de caracteres.
--  Para determinar la URL, podemos usar un switch como expresión, que resulta bastante cómodo. También podríamos haber creado un `Map<String, String>`, que _mapeara_ cada rol con su URL correspondiente.
+-  Para determinar la URL, podemos usar un [switch como expresión](https://docs.oracle.com/en/java/javase/17/language/switch-expressions.html), que resulta bastante cómodo. También podríamos haber creado un `Map<String, String>`, que _mapeara_ cada rol con su URL correspondiente.
 -  La comprobación de `response.isCommitted()` sirve para saber si, por alguna causa, ya se hubiera comenzado a enviar la respuesta HTTP al navegador, ya que de ser así, no podremos realizar convenientemente al redirección.
--  
+
 
 ## Configuración de nuestro `AuthenticationSuccessHandler` en la seguridad.
 
