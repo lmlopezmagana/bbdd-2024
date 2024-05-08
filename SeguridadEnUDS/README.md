@@ -208,23 +208,28 @@ public class SecurityConfig {
 	
 	private final UserDetailsService userDetailsService;
 	private final PasswordEncoder passwordEncoder;
-	
-	@Bean
+
+    @Bean
     SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-    	http.authorizeHttpRequests(
-				(authz) -> authz.requestMatchers("/css/**", "/js/**", "/h2-console/**")
-				.permitAll().anyRequest().authenticated())
-			.formLogin((loginz) -> loginz
-					.loginPage("/login").permitAll());
-		
-		// Añadimos esto para poder seguir accediendo a la consola de H2
-		// con Spring Security habilitado.
-    	http.csrf(csrfz -> csrfz.disable());
-    	http.headers(headersz -> headersz
-    			.frameOptions(frameOptionsz -> frameOptionsz.disable()));
-		
-		return http.build();
-	}
+        http.authorizeHttpRequests(
+                        (authz) -> authz.requestMatchers("/css/**", "/js/**", "/h2-console/**").permitAll()
+                                .requestMatchers("/admin/**").hasRole("ADMIN")
+                                .anyRequest().authenticated())
+                .formLogin((loginz) -> loginz
+                        .loginPage("/login").permitAll())
+                .logout((logoutz) -> logoutz
+                        .logoutUrl("/logout")
+                        .logoutSuccessUrl("/login")
+                        .permitAll());
+
+        // Añadimos esto para poder seguir accediendo a la consola de H2
+        // con Spring Security habilitado.
+        http.csrf(csrfz -> csrfz.disable());
+        http.headers(headersz -> headersz
+                .frameOptions(frameOptionsz -> frameOptionsz.disable()));
+
+        return http.build();
+    }
 
 	// Resto del código
 }
@@ -303,7 +308,7 @@ public class InitData {
 ```
 
 > Estos datos de prueba también los podríamos haber cargado a través del fichero `import.sql` como en otras ocasiones.
-
+> Para poder obtener desde el terminal la contraseña codificada se puede usar Spring Boot CLI. Más información en [https://www.baeldung.com/spring-boot-cli-encode-passwords](https://www.baeldung.com/spring-boot-cli-encode-passwords)
 
 
 
