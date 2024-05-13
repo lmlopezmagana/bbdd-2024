@@ -29,3 +29,4 @@ A continuación, se detallan los proyectos que se incluyen dentro del repositori
   - [Ejemplo 13 - Seguridad en base de datos](./SeguridadEnUDS/): segundo acercamiento a Spring Security con la implementación de un mecanismo de autenticación con dos roles diferentes, almacenando los usuarios en base de datos a través del uso de entidades y repositorios de Spring Data JPA. 
   - [Ejemplo 14 - Login según el rol](./LoginSegunRol/): adaptación del primer ejemplo de seguridad para que al realizar el login de un usuario, se le redirija a una URL específica según su rol.
 
+- [Ejemplo 15 - Consultas derivadas del nombre](./ConsultasDerivadas/): mecanismo ofrecido por Spring Data JPA para realizar consultas sin necesidad de saber SQL u otro lenguaje declarativo.
